@@ -354,7 +354,7 @@ public:
         }
 
         csharpCode << std::endl << "m_noise.SetSeed(" << fnlSeed << ");";
-        csharpCode << std::endl << "m_noise.SetFrequency(" << fnlFrequency << ");";
+        csharpCode << std::endl << "m_noise.SetFrequency(" << fnlFrequency << "f);";
 
         if (fnlFractalType > FastNoiseLite::FractalType::FractalType_None)
         {
