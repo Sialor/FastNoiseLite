@@ -29,7 +29,8 @@ public:
     }
 
     std::stringstream csharpCode;
-
+    std::stringstream unityFNLComponent;
+    
     uint32_t noiseTex = 0;
     ImVec2 noiseTexSize;
     int noiseTexSizeGenX;
@@ -406,6 +407,31 @@ public:
 
         ImGui::BeginViewportSideBar("status", ImGui::GetMainViewport(), ImGuiDir_Down, 32, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         float textOffset = 0;
+
+        std::stringstream().swap(unityFNLComponent);
+        unityFNLComponent << fnlNoiseType << ";" << std::endl;
+        unityFNLComponent << fnlRotationType << ";" << std::endl;
+        unityFNLComponent << fnlSeed << ";" << std::endl;
+        unityFNLComponent << fnlFrequency << ";" << std::endl;
+        unityFNLComponent << fnlFractalType << ";" << std::endl;
+        unityFNLComponent << fnlFractalOctaves << ";" << std::endl;
+        unityFNLComponent << fnlFractalLacunarity << ";" << std::endl;
+        unityFNLComponent << fnlFractalGain << ";" << std::endl;
+        unityFNLComponent << fnlFractalWeightedStrength << ";" << std::endl;
+        unityFNLComponent << fnlFractalPingPongStrength << ";" << std::endl;
+        unityFNLComponent << fnlCellularType << ";" << std::endl;
+        unityFNLComponent << fnlCellularReturnType << ";" << std::endl;
+        unityFNLComponent << fnlCellularJitter << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpType << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpRotationType << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpAmplitude << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpSeed << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpFrequency << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpFractalType << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpFractalOctaves << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpFractalLacunarity << ";" << std::endl;
+        unityFNLComponent << fnlDomainWarpFractalGain << std::endl;
+
         ImGui::Text("Preview Stats: %0.02fms", previewGenTimeFinal);
         ImGui::SameLine(textOffset += 200);
         ImGui::Text("Min: %0.04f", previewMinFinal);
@@ -413,6 +439,8 @@ public:
         ImGui::Text("Max: %0.04f", previewMaxFinal);
         ImGui::SameLine(textOffset += 100);
         ImGui::Text("Mean: %0.04f", previewMeanFinal);
+        ImGui::SameLine(textOffset += 100);
+        ImGui::InputText("Params Unity FNLComponent", (char*)unityFNLComponent.str().c_str(), unityFNLComponent.tellp(), ImGuiInputTextFlags_ReadOnly);
 
         ImGui::SameLine(ImGui::GetWindowWidth() - ImGui::CalcTextSize("GitHub").x - 15);
         ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 2);
