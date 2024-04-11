@@ -344,8 +344,8 @@ public:
 
         ImGui::Begin("CCharp Code");
         std::stringstream().swap(csharpCode);
-        csharpCode << std::endl << "private readonly FastNoiseLite m_noise = new();";
-        csharpCode << std::endl << std::endl;
+        csharpCode << "private readonly FastNoiseLite m_noise = new();";
+        csharpCode << std::endl;
         csharpCode << std::endl << "m_noise.SetNoiseType(FastNoiseLite.NoiseType." << enumNoiseType[fnlNoiseType] << ");";
         
         if (fnlRotationType > FastNoiseLite::RotationType3D::RotationType3D_None)
@@ -379,6 +379,7 @@ public:
 
         if (fnlDomainWarpType > 0 /* There is no FastNoiseLite::DomainWarpType::DomainWarpType_None */)
         {
+            csharpCode << std::endl << "private readonly FastNoiseLite m_noiseDomainWarp = new();";
             csharpCode << std::endl << "m_noiseDomainWarp.SetDomainWarpType(FastNoiseLite.DomainWarpType." << enumDomainWarpType[fnlDomainWarpType] << ");";
             
             if (preview3d)
