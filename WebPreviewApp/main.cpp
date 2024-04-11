@@ -379,7 +379,9 @@ public:
 
         if (fnlDomainWarpType > 0 /* There is no FastNoiseLite::DomainWarpType::DomainWarpType_None */)
         {
+            csharpCode << std::endl;
             csharpCode << std::endl << "private readonly FastNoiseLite m_noiseDomainWarp = new();";
+            csharpCode << std::endl;
             csharpCode << std::endl << "m_noiseDomainWarp.SetDomainWarpType(FastNoiseLite.DomainWarpType." << enumDomainWarpType[fnlDomainWarpType] << ");";
             
             if (preview3d)
