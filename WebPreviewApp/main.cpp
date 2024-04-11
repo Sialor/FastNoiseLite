@@ -401,7 +401,7 @@ public:
             csharpCode << std::endl << "m_noiseDomainWarp.SetFractalLacunarity(" << fnlDomainWarpFractalLacunarity << "f);";
             csharpCode << std::endl << "m_noiseDomainWarp.SetFractalGain(" << fnlDomainWarpFractalGain << "f);";
         }
-        ImGui::InputTextMultiline("Hello, World!", (char*)csharpCode.str().c_str(), csharpCode.tellp(), ImVec2(-FLT_MIN, -FLT_MIN), ImGuiInputTextFlags_ReadOnly);
+        ImGui::InputTextMultiline("CSharp lines", (char*)csharpCode.str().c_str(), csharpCode.tellp(), ImVec2(-FLT_MIN, -FLT_MIN), ImGuiInputTextFlags_ReadOnly);
         ImGui::End();
 
         ImGui::BeginViewportSideBar("status", ImGui::GetMainViewport(), ImGuiDir_Down, 32, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
