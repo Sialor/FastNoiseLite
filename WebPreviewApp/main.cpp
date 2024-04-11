@@ -340,6 +340,10 @@ public:
         ImGui::Image((void*)(intptr_t)noiseTex, noiseTexSize);
         ImGui::End();
 
+        ImGui::Begin("CCharp Editor");
+        ImGui::TextUnformatted("Hello, World!");
+        ImGui::End();
+
         ImGui::BeginViewportSideBar("status", ImGui::GetMainViewport(), ImGuiDir_Down, 32, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         float textOffset = 0;
         ImGui::Text("Preview Stats: %0.02fms", previewGenTimeFinal);
