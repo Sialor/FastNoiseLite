@@ -344,59 +344,59 @@ public:
 
         ImGui::Begin("CCharp Code");
         std::stringstream().swap(csharpCode);
-        csharpCode << "private readonly FastNoiseLite m_noise = new();";
-        csharpCode << std::endl;
-        csharpCode << "m_noise.SetNoiseType(FastNoiseLite.NoiseType." << enumNoiseType[fnlNoiseType] << ");";
+        csharpCode << std::endl << "private readonly FastNoiseLite m_noise = new();";
+        csharpCode << std::endl << std::endl;
+        csharpCode << std::endl << "m_noise.SetNoiseType(FastNoiseLite.NoiseType." << enumNoiseType[fnlNoiseType] << ");";
         
         if (fnlRotationType > FastNoiseLite::RotationType3D::RotationType3D_None)
         {
-            csharpCode << "m_noise.SetRotationType3D(FastNoiseLite.RotationType3DRotationType3D." << enumRotationType[fnlRotationType] << ");";
+            csharpCode << std::endl << "m_noise.SetRotationType3D(FastNoiseLite.RotationType3DRotationType3D." << enumRotationType[fnlRotationType] << ");";
         }
 
-        csharpCode << "m_noise.SetSeed(" << fnlSeed << ");";
-        csharpCode << "m_noise.SetFrequency(" << fnlFrequency << ");";
+        csharpCode << std::endl << "m_noise.SetSeed(" << fnlSeed << ");";
+        csharpCode << std::endl << "m_noise.SetFrequency(" << fnlFrequency << ");";
 
         if (fnlFractalType > FastNoiseLite::FractalType::FractalType_None)
         {
-            csharpCode << "m_noise.SetFractalType(FastNoiseLite.FractalType." << enumFractalType[fnlFractalType] << ");";
-            csharpCode << "m_noise.SetFractalOctaves(" << fnlFractalOctaves << ");";
-            csharpCode << "m_noise.SetFractalLacunarity(" << fnlFractalLacunarity << "f);";
-            csharpCode << "m_noise.SetFractalGain(" << fnlFractalGain << "f);";
-            csharpCode << "m_noise.SetFractalWeightedStrength(" << fnlFractalWeightedStrength << "f);";
+            csharpCode << std::endl << "m_noise.SetFractalType(FastNoiseLite.FractalType." << enumFractalType[fnlFractalType] << ");";
+            csharpCode << std::endl << "m_noise.SetFractalOctaves(" << fnlFractalOctaves << ");";
+            csharpCode << std::endl << "m_noise.SetFractalLacunarity(" << fnlFractalLacunarity << "f);";
+            csharpCode << std::endl << "m_noise.SetFractalGain(" << fnlFractalGain << "f);";
+            csharpCode << std::endl << "m_noise.SetFractalWeightedStrength(" << fnlFractalWeightedStrength << "f);";
 
             if (fnlFractalType == FastNoiseLite::FractalType::FractalType_PingPong)
             {
-                csharpCode << "m_noise.SetFractalPingPongStrength(" << fnlFractalPingPongStrength << "f);";
+                csharpCode << std::endl << "m_noise.SetFractalPingPongStrength(" << fnlFractalPingPongStrength << "f);";
             }
         }
 
         if (fnlNoiseType == FastNoiseLite::NoiseType::NoiseType_Cellular)
         {
-            csharpCode << "m_noise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction." << enumCellularType[fnlCellularType] << ");";
-            csharpCode << "m_noise.SetCellularReturnType(FastNoiseLite.CellularReturnType." << enumCellularReturnType[fnlCellularReturnType] << ");";
-            csharpCode << "m_noise.SetCellularJitter(" << fnlCellularJitter << "f);";
+            csharpCode << std::endl << "m_noise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction." << enumCellularType[fnlCellularType] << ");";
+            csharpCode << std::endl << "m_noise.SetCellularReturnType(FastNoiseLite.CellularReturnType." << enumCellularReturnType[fnlCellularReturnType] << ");";
+            csharpCode << std::endl << "m_noise.SetCellularJitter(" << fnlCellularJitter << "f);";
         }
 
         if (fnlDomainWarpType > 0 /* There is no FastNoiseLite::DomainWarpType::DomainWarpType_None */)
         {
-            csharpCode << "m_noiseDomainWarp.SetDomainWarpType(FastNoiseLite.DomainWarpType." << enumDomainWarpType[fnlDomainWarpType] << ");";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetDomainWarpType(FastNoiseLite.DomainWarpType." << enumDomainWarpType[fnlDomainWarpType] << ");";
             
             if (preview3d)
             {
-                csharpCode << "m_noiseDomainWarp.SetRotationType3D(FastNoiseLite.RotationType3DRotationType3D." << enumRotationType[fnlDomainWarpRotationType] << ");";
+                csharpCode << std::endl << "m_noiseDomainWarp.SetRotationType3D(FastNoiseLite.RotationType3DRotationType3D." << enumRotationType[fnlDomainWarpRotationType] << ");";
             }
 
-            csharpCode << "m_noiseDomainWarp.SetDomainWarpAmp(" << fnlDomainWarpAmplitude << "f);";
-            csharpCode << "m_noiseDomainWarp.SetSeed(" << fnlDomainWarpSeed << ");";
-            csharpCode << "m_noiseDomainWarp.SetFrequency(" << fnlDomainWarpFrequency << "f);";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetDomainWarpAmp(" << fnlDomainWarpAmplitude << "f);";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetSeed(" << fnlDomainWarpSeed << ");";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetFrequency(" << fnlDomainWarpFrequency << "f);";
         }
 
         if (fnlDomainWarpFractalType > FastNoiseLite::FractalType::FractalType_None)
         {
-            csharpCode << "m_noiseDomainWarp.SetFractalType(FastNoiseLite.FractalType." << enumFractalType[fnlDomainWarpFractalType] << ");";
-            csharpCode << "m_noiseDomainWarp.SetFractalOctaves(" << fnlDomainWarpFractalOctaves << ");";
-            csharpCode << "m_noiseDomainWarp.SetFractalLacunarity(" << fnlDomainWarpFractalLacunarity << "f);";
-            csharpCode << "m_noiseDomainWarp.SetFractalGain(" << fnlDomainWarpFractalGain << "f);";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetFractalType(FastNoiseLite.FractalType." << enumFractalType[fnlDomainWarpFractalType] << ");";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetFractalOctaves(" << fnlDomainWarpFractalOctaves << ");";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetFractalLacunarity(" << fnlDomainWarpFractalLacunarity << "f);";
+            csharpCode << std::endl << "m_noiseDomainWarp.SetFractalGain(" << fnlDomainWarpFractalGain << "f);";
         }
         ImGui::InputTextMultiline("Hello, World!", (char*)csharpCode.str().c_str(), csharpCode.tellp(), ImVec2(-FLT_MIN, -FLT_MIN), ImGuiInputTextFlags_ReadOnly);
         ImGui::End();
