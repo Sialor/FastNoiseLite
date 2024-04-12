@@ -11,9 +11,25 @@
 
 #include <emscripten.h>
 #include <emscripten_browser_file.h>
+#include "emscripten_browser_clipboard.h"
 
 #include "../Cpp/FastNoiseLite.h"
 #include "FastNoiseLite.h"
+
+static std::string clipboard_content;
+
+char const* get_clipboard_for_imgui(void* user_data [[maybe_unused]])
+{
+    /// Callback for imgui, to return clipboard content
+    return clipboard_content.c_str();
+}
+
+void set_clipboard_from_imgui(void* user_data [[maybe_unused]], char const* text)
+{
+    /// Callback for imgui, to set clipboard content
+    clipboard_content = text;
+    emscripten_browser_clipboard::copy(clipboard_content);
+}
 
 class FastNoiseLitePreviewApp : public ImGui_Application
 {
@@ -22,6 +38,25 @@ public:
     {
         bool success = ImGui_Application::init();
         set_window_title("FastNoise Lite GUI");
+
+        ImGui::CreateContext();
+        ImGuiIO& imgui_io{ ImGui::GetIO() };
+        imgui_io.IniFilename = nullptr; // disable saving settings to disk
+        imgui_io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange; // don't attempt to change mouse cursors
+        imgui_io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // enable keyboard controls
+
+        emscripten_browser_clipboard::paste([](std::string const& paste_data, void* callback_data [[maybe_unused]]) {
+            /// Callback to handle clipboard paste from browser
+            clipboard_content = std::move(paste_data);
+        });
+        /// Not needed for this example, as ImGui sets the content - but if you want to respond to browser copy request events, use this:
+        // emscripten_browser_clipboard::copy([](void *callback_data [[maybe_unused]]){
+        //   /// Callback to offer data for clipboard copy to browser
+        //   return clipboard_content.c_str();
+        // });
+
+        imgui_io.GetClipboardTextFn = get_clipboard_for_imgui;
+        imgui_io.SetClipboardTextFn = set_clipboard_from_imgui;
 
         ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
